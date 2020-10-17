@@ -45,14 +45,14 @@ module.exports = {
         }
 
         if (Object.keys(errors).length) {
-          throw new AuthenticationError('user not found', { errors });
+          throw new UserInputError('user not found', { errors });
         }
 
         const correctPassword = await bcrypt.compare(password, user.password);
 
         if (!correctPassword) {
           errors.password = 'password is incorrect';
-          throw new AuthenticationError('password is incorrect', { errors });
+          throw new UserInputError('password is incorrect', { errors });
         }
 
         const token = jwt.sign({ username }, JWT_SECRET, {expiresIn: 60 * 60 });
