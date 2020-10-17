@@ -10,10 +10,12 @@ const typeDefs = typeDef;
 // A map of functions which return data for the schema.
 const resolvers = resolver;
 
+const contextMiddleware = require('./middlewares/contextMiddleware');
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ctx => ctx
+  context: contextMiddleware
 });
 
 server.listen().then(({ url }) => {
