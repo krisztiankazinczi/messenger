@@ -10,5 +10,12 @@ export default function useForm(defaults) {
     });
   }
 
-  return { values, updateValue };
+  function updateValueOutsideEvent(field, newValue) {
+    setValues({
+      ...values,
+      [field]: newValue,
+    });
+  }
+
+  return { values, updateValue, updateValueOutsideEvent };
 }
