@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "React\r React Bootstrap\r Nodejs\r GraphQL\r MySQL with Sequelize",
   "main": "server.js",
+  "eslintConfig": {
+    "extends": [
+      "wesbos"
+    ],
+    "rules": {
+      "react/prop-types": 0
+    }
+  },
   "dependencies": {
     "apollo-server": "^2.18.2",
     "bcryptjs": "^2.4.3",

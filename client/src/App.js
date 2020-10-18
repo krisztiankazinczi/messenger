@@ -10,6 +10,7 @@ import Login from './pages/login';
 import Home from './pages/home';
 
 import { AuthProvider } from './context/auth';
+import { MessageProvider } from './context/message';
 import DynamicRoute from './components/DynamicRoute';
 
 
@@ -19,15 +20,17 @@ function App() {
   return (
     <ApolloProvider>
       <AuthProvider>
-        <BrowserRouter>
-          <Container className="pt-5">
-            <Switch>
-              <DynamicRoute path="/register" component={Register} guest />
-              <DynamicRoute path="/login" component={Login} guest />
-              <DynamicRoute exact path="/" component={Home} authenticated />
-            </Switch>
-          </Container>
-        </BrowserRouter>
+        <MessageProvider>
+          <BrowserRouter>
+            <Container className="pt-5">
+              <Switch>
+                <DynamicRoute path="/register" component={Register} guest />
+                <DynamicRoute path="/login" component={Login} guest />
+                <DynamicRoute exact path="/" component={Home} authenticated />
+              </Switch>
+            </Container>
+          </BrowserRouter>
+        </MessageProvider>
       </AuthProvider>
     </ApolloProvider>
   );
