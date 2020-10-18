@@ -37,10 +37,13 @@ const messageReducer = (state, action) => {
         usersCopy = [...state.users];
 
         userIndex = usersCopy.findIndex(u => u.username === username);
-
-       let newUser = {
+        
+        // we need to check if the user was selected before, because if not, than the messages array is not existing for that user!!!
+        // it's needed because of the subscription!!!
+        let newUser = {
          ...usersCopy[userIndex], 
-         messages: [message, ...usersCopy[userIndex].messages]
+         messages: usersCopy[userIndex].messages ? [message, ...usersCopy[userIndex].messages] : null,
+         latestMessage: message
        }
 
        usersCopy[userIndex] = newUser;
