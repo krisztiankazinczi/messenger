@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { gql, useLazyQuery } from '@apollo/client'
 import { Col } from 'react-bootstrap';
+
+import Message from './Message';
 
 import { useMessageDispatch, useMessageState } from '../../context/message';
 
@@ -48,15 +50,23 @@ export default function Messages() {
   } else if (messagesLoading) {
     selectedChatMarkup = <p>Loading...</p>
   } else if (messages.length) {
-    selectedChatMarkup = messages.map(message => (
-      <p key={message.uuid}>{message.content}</p>
+    selectedChatMarkup = messages.map((message, index) => (
+      <Fragment key={message.uuid}>
+        <Message message={message} />
+        {/* this needs because the margin of the top element near nav bar collapse */}
+        {index === messages.length - 1 && (
+          <div className="invisible">
+            <hr className="m-0" />
+          </div>
+        )}
+      </Fragment>
     ))
   } else if (messages.length === 0) {
-    selectedChatMarkup = <p>You are not connected! Send your first message!</p>
+    selectedChatMarkup = <p>You are now connected! Send your first message!</p>
   }
 
   return (
-    <Col xs={8}>
+    <Col xs={10} md={8} className="messages-box d-flex flex-column-reverse">
       {selectedChatMarkup}
     </Col>
   )

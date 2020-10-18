@@ -14,7 +14,7 @@ export default function Home({ history }) {
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
-    window.location.href('/login')
+    window.location.href = '/login'
   }
 
   return (

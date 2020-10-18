@@ -42,9 +42,17 @@ export default function Users() {
     usersMarkup = users.map(user => {
       const selected = selectedUser === user.username;
 
-      return (<div role="button" key={user.username} className={classNames("user-div d-flex p-3", { 'bg-white': selected })} onClick={() => dispatch({ type: 'SET_SELECTED_USER', payload: user.username })}>
-        <Image src={user.imageUrl} roundedCircle className="mr-2" style={{width: 50, height: 50, objectFit: 'cover'}} />
-        <div>
+      return (
+      <div 
+        role="button" 
+        key={user.username} 
+        className={classNames("user-div d-flex justify-content-center justify-content-md-start p-3", {
+         'bg-white': selected 
+        })} 
+        onClick={() => dispatch({ type: 'SET_SELECTED_USER', payload: user.username })}
+      >
+        <Image src={user.imageUrl} className="user-image" />
+        <div className="d-none d-md-block ml-2">
           <p className="text-success">{user.username}</p>
           <p className="font-weight-light">
             { user.latestMessage ? user.latestMessage.content : `You are now connected to ${user.username}` }
@@ -55,7 +63,7 @@ export default function Users() {
   }
 
   return (
-    <Col xs={4} className="p-0 bg-secondary">
+    <Col xs={2} md={4} className="p-0 bg-secondary">
       {usersMarkup}
     </Col>
   )
