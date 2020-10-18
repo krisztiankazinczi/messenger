@@ -10,13 +10,12 @@ module.exports = {
           if (!user) throw new AuthenticationError('Unauthenticated');
 
           const otherUser = await User.findOne({
-            where: { username: from }
+            where: { username: from },
           })
-
-          if (!otherUser) throw new UserInputError('User not found');
-
+          if (!otherUser) throw new UserInputError('User not found')
+  
           const usernames = [user.username, otherUser.username];
-
+          console.log(usernames)
           const messages = await Message.findAll({
             where: { 
               from: { [Op.in]: usernames},
@@ -24,7 +23,7 @@ module.exports = {
             },
             order: [['createdAt', 'DESC']]
           })
-          
+          console.log(messages)
             return messages          
         } catch (err) {
           console.log(err);
