@@ -16,6 +16,13 @@ type Message {
   to: String!
   createdAt: String!
 }
+type Reaction {
+  uuid: String!
+  content: String!
+  createdAt: String!
+  message: Message!
+  user: User!
+}
 type Query {
   getUsers: [User]!
   login(username: String! password: String!): User!
@@ -24,8 +31,10 @@ type Query {
 type Mutation {
   register(username: String! email: String! password: String! confirmPassword: String!): User!
   sendMessage(to: String! content: String!): Message!
+  reactToMessage(uuid: String! content: String!): Reaction!
 }
 type Subscription {
   newMessage: Message!
+  newReaction: Reaction!
 }
 `;
